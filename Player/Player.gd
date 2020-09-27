@@ -3,6 +3,7 @@ extends KinematicBody2D
 var velocity = Vector2.ZERO
 var roll_vector = Vector2.ZERO
 var direction = 0
+var stats = PlayerStats
 
 #可以用accleration，velocity+=，*delta，see 2
 
@@ -21,10 +22,11 @@ enum {
 	ATTACK,
 	ROLL
 }
-
+ 
 var state = MOVE
 
 func _ready():
+	stats.connect("no_health",self,"queue_free")
 	animationTree.active = true
 	SwordHit.knockback = roll_vector
 	
