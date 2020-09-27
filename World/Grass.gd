@@ -1,12 +1,11 @@
 extends Node2D
 
+const GrassEffect = preload("res://Effects/Grasseffect.tscn")
 
 
 func create_effect():
-	var GrassEffect = load("res://Effects/Grasseffect.tscn")
 	var grasseffect = GrassEffect.instance()
-	var main = get_tree().current_scene
-	main.add_child(grasseffect)
+	get_parent().add_child(grasseffect)
 	grasseffect.global_position = global_position
 	
 

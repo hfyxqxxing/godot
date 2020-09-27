@@ -6,10 +6,10 @@ var direction = 0
 
 #可以用accleration，velocity+=，*delta，see 2
 
-const MAX_SPEED = 100
-const A = 10
-const friction = 500
-const roll_speed = 0.8
+export var MAX_SPEED = 100
+export var A = 10
+export var friction = 500
+export(float) var roll_speed = 0.8
 
 onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree

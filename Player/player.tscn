@@ -600,6 +600,7 @@ states/run/node = SubResource( 37 )
 states/run/position = Vector2( 838, 96 )
 transitions = [ "idle", "run", SubResource( 38 ), "run", "idle", SubResource( 39 ), "idle", "attack", SubResource( 40 ), "attack", "idle", SubResource( 41 ), "idle", "roll", SubResource( 42 ), "roll", "idle", SubResource( 43 ) ]
 start_node = "idle"
+graph_offset = Vector2( -158.863, 59.5602 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=45]
 
@@ -620,7 +621,7 @@ __meta__ = {
 position = Vector2( 0, -10 )
 texture = ExtResource( 2 )
 hframes = 60
-frame = 49
+frame = 18
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
@@ -649,9 +650,9 @@ tree_root = SubResource( 44 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 45 )
 parameters/attack/blend_position = Vector2( 0, 0 )
-parameters/idle/blend_position = Vector2( -0.106646, -0.37931 )
+parameters/idle/blend_position = Vector2( 0, 0 )
 parameters/roll/blend_position = Vector2( 0, 0 )
-parameters/run/blend_position = Vector2( -0.00309122, 0.237069 )
+parameters/run/blend_position = Vector2( 0, 0 )
 
 [node name="attackpivot" type="Position2D" parent="."]
 position = Vector2( 0, -5 )
@@ -665,6 +666,7 @@ position = Vector2( 15.1004, -0.339359 )
 collision_layer = 0
 collision_mask = 8
 script = ExtResource( 4 )
+damage = 2
 
 [node name="CollisionShape2D" parent="attackpivot/SwordHit" index="0"]
 shape = SubResource( 46 )
