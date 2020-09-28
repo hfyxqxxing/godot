@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=2]
+[gd_scene load_steps=60 format=2]
 
 [ext_resource path="res://Player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World/bush.tscn" type="PackedScene" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://World/CliffTileset.png" type="Texture" id=5]
 [ext_resource path="res://World/Grass.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Enemies/Bat.tscn" type="PackedScene" id=7]
+[ext_resource path="res://UI/HealthUI.tscn" type="PackedScene" id=8]
+[ext_resource path="res://World/Tree.tscn" type="PackedScene" id=9]
 
 [sub_resource type="TileSet" id=1]
 0/name = "DirtTileset.png 0"
@@ -493,12 +495,12 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
 [node name="World" type="Node2D"]
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Background" type="Sprite" parent="."]
 position = Vector2( 168, 88 )
 scale = Vector2( 1.35, 1.1481 )
 texture = ExtResource( 3 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 320, 180 )
+region_rect = Rect2( 0, 0, 369, 250 )
 
 [node name="DirtRoad" type="TileMap" parent="."]
 tile_set = SubResource( 1 )
@@ -514,10 +516,18 @@ collision_mask = 0
 format = 1
 tile_data = PoolIntArray( -65533, 0, 0, -65532, 0, 1, -65531, 0, 5, -65530, 0, 196610, -65528, 0, 0, -65527, 0, 1, -65526, 0, 2, 3, 0, 65536, 4, 0, 65537, 5, 0, 65538, 8, 0, 65536, 9, 0, 65537, 10, 0, 65538, 65539, 0, 131072, 65540, 0, 131073, 65541, 0, 131074, 65544, 0, 131072, 65545, 0, 131073, 65546, 0, 131074, 196607, 0, 0, 131072, 0, 1, 131073, 0, 2, 262143, 0, 65536, 196608, 0, 65537, 196609, 0, 65538, 327679, 0, 65536, 262144, 0, 65537, 262145, 0, 65538, 262150, 0, 0, 262151, 0, 1, 262152, 0, 1, 262153, 0, 5, 262154, 0, 196610, 393215, 0, 131072, 327680, 0, 131073, 327681, 0, 131074, 327685, 0, 4, 327686, 0, 196614, 327687, 0, 131073, 327688, 0, 131073, 327689, 0, 131074, 393221, 0, 131075 )
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 145.037, 101.508 )
+current = true
+smoothing_enabled = true
+
 [node name="YSort" type="YSort" parent="."]
 
 [node name="KinematicBody2D" parent="YSort" instance=ExtResource( 1 )]
 position = Vector2( 145.037, 101.508 )
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/KinematicBody2D"]
+remote_path = NodePath("../../../Camera2D")
 
 [node name="Bushes" type="YSort" parent="YSort"]
 
@@ -585,13 +595,24 @@ position = Vector2( 240, 56 )
 [node name="Bats" type="YSort" parent="YSort"]
 
 [node name="Bat" parent="YSort/Bats" instance=ExtResource( 7 )]
-position = Vector2( 48.8389, 91.8891 )
+position = Vector2( 37.8788, 89.7678 )
 
 [node name="Bat2" parent="YSort/Bats" instance=ExtResource( 7 )]
-position = Vector2( 202.211, 72.1734 )
+position = Vector2( 202.435, 54.1133 )
 
 [node name="Bat3" parent="YSort/Bats" instance=ExtResource( 7 )]
-position = Vector2( 288, 120 )
+position = Vector2( 302.142, 112.575 )
 
 [node name="Bat4" parent="YSort/Bats" instance=ExtResource( 7 )]
-position = Vector2( 120, 152 )
+position = Vector2( 103.737, 161.192 )
+
+[node name="YSort" type="YSort" parent="YSort"]
+
+[node name="Tree" parent="YSort/YSort" instance=ExtResource( 9 )]
+position = Vector2( 285.335, 32.1449 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HealthUI" parent="CanvasLayer" instance=ExtResource( 8 )]
+margin_right = 59.0
+margin_bottom = 18.0

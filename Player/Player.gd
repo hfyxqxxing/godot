@@ -12,10 +12,14 @@ export var A = 10
 export var friction = 500
 export(float) var roll_speed = 0.8
 
+const PlayerHurt = preload("res://Player/PlayerHurt.tscn")
+
 onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get('parameters/playback')
 onready var SwordHit = $attackpivot/SwordHit
+onready var hurtbox = $HurtBox
+onready var blingPlayer = $Blink
 
 enum {
 	MOVE,
@@ -26,6 +30,8 @@ enum {
 var state = MOVE
 
 func _ready():
+	#每次运行随机初始不一样
+	randomize()
 	stats.connect("no_health",self,"queue_free")
 	animationTree.active = true
 	SwordHit.knockback = roll_vector
@@ -91,6 +97,8 @@ func attack_is_finished():
 	state = MOVE
 
 
+
+
 func find_direction(velocity):
 	if velocity.x == 0:
 		direction = velocity.y * 100
@@ -110,3 +118,22 @@ func find_direction(velocity):
 			return Vector2.UP
 		else:
 			return Vector2.DOWN
+
+
+func _on_HurtBox_area_entered(_area):
+	stats.health -= 1
+	hurtbox.create_hit_effect()
+	hurtbox.start_invincibility(1)
+	var playerhurt = PlayerHurt.instance()
+	get_tree().current_scene.add_child(playerhurt)
+	
+
+
+func _on_HurtBox_invincibility_started():
+	blingPlayer.play("Start")
+	
+
+
+
+func _on_HurtBox_invincibility_ended():
+	blingPlayer.play("Stop")
