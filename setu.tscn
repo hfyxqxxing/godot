@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://World/QQ图片20200505000608.jpg" type="Texture" id=1]
+
+[node name="Sprite" type="Sprite"]
+scale = Vector2( 0.0477127, 0.0494943 )
+texture = ExtResource( 1 )
+offset = Vector2( 0, 800 )

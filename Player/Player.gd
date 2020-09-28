@@ -120,10 +120,10 @@ func find_direction(velocity):
 			return Vector2.DOWN
 
 
-func _on_HurtBox_area_entered(_area):
-	stats.health -= 1
+func _on_HurtBox_area_entered(area):
+	stats.health -= area.damage
 	hurtbox.create_hit_effect()
-	hurtbox.start_invincibility(1)
+	hurtbox.start_invincibility(1.5)
 	var playerhurt = PlayerHurt.instance()
 	get_tree().current_scene.add_child(playerhurt)
 	
@@ -131,9 +131,11 @@ func _on_HurtBox_area_entered(_area):
 
 func _on_HurtBox_invincibility_started():
 	blingPlayer.play("Start")
-	
+
+
+#如果要给bat做shader，会有全场闪烁，点击local_to_scene
 
 
 
 func _on_HurtBox_invincibility_ended():
-	blingPlayer.play("Stop")
+	blingPlayer.play("End")
